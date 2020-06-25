@@ -20,35 +20,36 @@ typedef void (*destructor)(void *);
 
 
 /* List constructor/destructor */
-list list_mklist();
-void list_rmlist(list);
+list list_mklist(); /* Construct an empty list */
+void list_rmlist(list); /* Delete the list and free all the memory */
 
 /* List accessors */
-void *list_head(list);
-void *list_last(list);
-void *list_at(list, size_t);
+void *list_head(list); /* Return datum from first element of list */
+void *list_last(list); /* Return datum from last element of list */
+void *list_at(list, size_t); /* Return datum from index. Null if out of bounds */
 
 /* List query */
-bool list_empty(list);
-size_t list_size(list);
+bool list_empty(list); /* Returns true if list is empty or list is NULL */
+size_t list_size(list); /* Return the size of the list */
 
 /* Functor methods */
-void list_fmap(list, functor);
+void list_fmap(list, functor); /* Apply a function (functor) to every element of the list */
 void list_imap(list, ifunctor); /* Apply functor with an additional index argument */
 
 /* Traversable methods */
-void list_sequence_(list, action);
+/* Performs an action, in order, in the list. Userful for printing */
+void list_sequence_(list, action); /* Apply an action on every element of the list */
 
 /* Foldable methods */
-void *list_foldr(accumulator, void *, list);
+void *list_foldr(accumulator, void *, list); /* Loop through list, accumulating values */
 
 /* List modification */
-void list_cons(list, void *);
-void list_snoc(list, void *);
-void *list_popLast(list);
-void *list_popHead(list);
+void list_cons(list, void *); /* Prepend to the list */
+void list_snoc(list, void *); /* Append to the list */
+void *list_popLast(list); /* Remove the last element from the list and return the datum */
+void *list_popHead(list); /* Remove the fist element from the list and return the datum */
 
 /* List misc */
-void list_print(list, action);
+void list_print(list, action); /* Print the list using the action */
 
 #endif /* LIST_H_ */
